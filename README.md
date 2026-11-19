@@ -9,12 +9,12 @@
 
 > **Consigne aux coordinateurs (G2, G3, G4...) :** Dès que votre groupe *fork* ce dépôt, ouvrez une **Pull Request** modifiant uniquement votre ligne dans le tableau ci-dessous et en ajoutant votre dossier `service-<nom-du-service>/` à la racine.
 
-| Service / Dossier | Groupe | Rôle & Domaine Fonctionnel | IP Proxmox (TP4) | Port | Protocole / Standard |
+| Service / Dossier | Groupe | Rôle & Domaine Fonctionnel | IP Proxmox | Port | Protocole / Standard |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **`api-gateway`** | Transversal | Point d'entrée central : routage, authentification JWT et équilibrage de charge | `192.168.1.10` | `8080` | REST / HTTP |
-| **`service-identite-ins`** | **G1** *(Coord.)* | Authentification, résolution de l'Identité Nationale de Santé (INS via CNIE/DGSN) et droits AMO/ALD | `192.168.1.11` | `8001` | REST / JWT |
-| **`service-facturation-amo`** | **G1** *(Coord.)* | Génération de la Feuille de Soins Électronique (FSE), codage NGAP, calcul TNR (CNSS/CNOPS) et liquidation | `192.168.1.11` | `8002` | REST / FSE |
-| **`service-ia-fraude`** | **G1** *(Coord.)* | Contrôle intelligent des remboursements AMO et détection d'anomalies/fraudes (Isolation Forest + GNN) | `192.168.1.11` | `8003` | REST / JSON |
+| **`service-identite-ins`** | **G1**  | Authentification, résolution de l'Identité Nationale de Santé (INS via CNIE/DGSN) et droits AMO/ALD | `192.168.1.11` | `8001` | REST / JWT |
+| **`service-facturation-amo`** | **G1**  | Génération de la Feuille de Soins Électronique (FSE), codage NGAP, calcul TNR (CNSS/CNOPS) et liquidation | `192.168.1.11` | `8002` | REST / FSE |
+| **`service-ia-fraude`** | **G1**  | Contrôle intelligent des remboursements AMO et détection d'anomalies/fraudes (Isolation Forest + GNN) | `192.168.1.11` | `8003` | REST / JSON |
 | *`service-<a-completer>`* | **G2** | *À compléter par le Groupe 2 lors de sa première Pull Request* | `192.168.1.12` | `8004` | *À préciser* |
 | *`service-<a-completer>`* | **G3** | *À compléter par le Groupe 3 lors de sa première Pull Request* | `192.168.1.13` | `8005` | *À préciser* |
 | *`service-<a-completer>`* | **G4** | *À compléter par le Groupe 4 lors de sa première Pull Request* | `192.168.1.14` | `8006` | *À préciser* |

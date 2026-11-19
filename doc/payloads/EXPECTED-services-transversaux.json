@@ -1,15 +1,61 @@
 {
-  "note": "Contrats attendus par G1 si d'autres groupes prennent en charge ces services transversaux (sinon simulés par mock)",
+  "note": "BROUILLON / PROPOSITION — Contrats d'interface initiaux à discuter et valider avec l'équipe G1 et les autres groupes",
   "service_dpi_clinique": {
+    "statut": "PROPOSITION (Pris en charge par un autre groupe — contrat à aligner ensemble)",
     "endpoint": "GET /fhir/v1/Encounter?patient={ins}",
-    "usage_par_g1": "Permet à service-ia-fraude de vérifier que l'acte facturé correspond à une vraie consultation clinique"
+    "usage_par_g1": "Permettrait à service-ia-fraude de vérifier que l'acte NGAP facturé correspond bien à une consultation clinique réelle dans le DPI",
+    "proposed_response_200": {
+      "resourceType": "Bundle",
+      "type": "searchset",
+      "total": 1,
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Encounter",
+            "id": "ENC-2026-00412",
+            "status": "finished",
+            "subject": {
+              "reference": "Patient/INS-MA-2026-88492014"
+            },
+            "participant": [
+              {
+                "individual": {
+                  "identifier": {
+                    "value": "INPE-0451298"
+                  }
+                }
+              }
+            ],
+            "period": {
+              "start": "2026-11-19T10:00:00Z",
+              "end": "2026-11-19T10:30:00Z"
+            },
+            "reasonCode": [
+              {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/sid/icd-10",
+                    "code": "J06.9"
+                  }
+                ]
+              }
+            ],
+            "actes_ngap_realises": ["CS-150"]
+          }
+        }
+      ]
+    }
   },
-  "service_consentement": {
-    "endpoint": "GET /api/v1/consent/{ins}",
-    "usage_par_g1": "Vérifie le consentement patient avant traitement analytique"
-  },
-  "service_audit_securite": {
-    "endpoint": "POST /api/v1/audit/logs",
-    "usage_par_g1": "Journalise les alertes de fraude IA et les accès aux données assurés"
+  "services_optionnels_non_attribues": {
+    "service_consentement": {
+      "statut": "PROPOSITION (En attente d'attribution à un groupe)",
+      "endpoint": "GET /api/v1/consent/{ins}",
+      "usage_par_g1": "Vérifie le consentement explicite du patient avant traitement analytique"
+    },
+    "service_audit_securite": {
+      "statut": "PROPOSITION (En attente d'attribution à un groupe)",
+      "endpoint": "POST /api/v1/audit/logs",
+      "usage_par_g1": "Journalise les alertes de fraude IA et les accès aux données assurés"
+    }
   }
 }
