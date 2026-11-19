@@ -1,0 +1,27 @@
+{
+  "service": "service-ia-fraude",
+  "groupe": "G1",
+  "endpoint": "POST /api/v1/fraud/analyze",
+  "request_body": {
+    "fse_id": "FSE-2026-00981",
+    "ins": "INS-MA-2026-88492014",
+    "inpe_praticien": "INPE-0451298",
+    "date_soin": "2026-11-19",
+    "montant_total_facture": 250.0,
+    "base_tnr": 150.0,
+    "actes_ngap": [
+      "CS-150"
+    ]
+  },
+  "response_200": {
+    "fse_id": "FSE-2026-00981",
+    "fraud_score": 0.08,
+    "risk_level": "LOW",
+    "decision_recommandee": "LIQUIDATION_24H",
+    "supervision_humaine_requise": false,
+    "explanations": [
+      "INS valide et droits CNSS ouverts",
+      "Tarif et fréquence d'actes conformes au profil historique"
+    ]
+  }
+}

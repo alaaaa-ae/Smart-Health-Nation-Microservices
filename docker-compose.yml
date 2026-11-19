@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Groupe 1 : Identité Nationale de Santé (INS)
+  service-identite-ins:
+    build: ./service-identite-ins
+    container_name: g1-service-identite-ins
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    networks:
+      - smart-health-net
+
+  # Groupe 1 : Facturation & Remboursement AMO (CNSS / CNOPS)
+  service-facturation-amo:
+    build: ./service-facturation-amo
+    container_name: g1-service-facturation-amo
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+    depends_on:
+      - service-identite-ins
+    networks:
+      - smart-health-net
+
+  # Groupe 1 : Détection de Fraude & Anomalies AMO (IA)
+  service-ia-fraude:
+    build: ./service-ia-fraude
+    container_name: g1-service-ia-fraude
+    ports:
+      - "8003:8003"
+    env_file:
+      - .env
+    depends_on:
+      - service-identite-ins
+      - service-facturation-amo
+    networks:
+      - smart-health-net
+
+networks:
+  smart-health-net:
+    driver: bridge

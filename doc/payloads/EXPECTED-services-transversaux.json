@@ -1,0 +1,15 @@
+{
+  "note": "Contrats attendus par G1 si d'autres groupes prennent en charge ces services transversaux (sinon simulés par mock)",
+  "service_dpi_clinique": {
+    "endpoint": "GET /fhir/v1/Encounter?patient={ins}",
+    "usage_par_g1": "Permet à service-ia-fraude de vérifier que l'acte facturé correspond à une vraie consultation clinique"
+  },
+  "service_consentement": {
+    "endpoint": "GET /api/v1/consent/{ins}",
+    "usage_par_g1": "Vérifie le consentement patient avant traitement analytique"
+  },
+  "service_audit_securite": {
+    "endpoint": "POST /api/v1/audit/logs",
+    "usage_par_g1": "Journalise les alertes de fraude IA et les accès aux données assurés"
+  }
+}

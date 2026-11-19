@@ -1,0 +1,25 @@
+# Environnements & Secrets
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# Node / JS
+node_modules/
+dist/
+build/
+
+# Java / Spring Boot
+target/
+*.jar
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

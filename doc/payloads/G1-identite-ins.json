@@ -1,0 +1,14 @@
+{
+  "service": "service-identite-ins",
+  "groupe": "G1",
+  "endpoint": "GET /api/v1/ins/resolve?cnie=AB123456",
+  "response_200": {
+    "ins": "INS-MA-2026-88492014",
+    "cnie": "AB123456",
+    "nom_complet": "ALAMI Youssef",
+    "organisme_amo": "CNSS",
+    "droits_ouverts": true,
+    "statut_ald": false,
+    "jwt_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}

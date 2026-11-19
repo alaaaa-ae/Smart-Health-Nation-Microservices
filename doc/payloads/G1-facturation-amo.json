@@ -1,0 +1,30 @@
+{
+  "service": "service-facturation-amo",
+  "groupe": "G1",
+  "endpoint": "POST /api/v1/fse/liquidate",
+  "request_body": {
+    "fse_id": "FSE-2026-00981",
+    "ins": "INS-MA-2026-88492014",
+    "organisme_amo": "CNSS",
+    "inpe_praticien": "INPE-0451298",
+    "type_parcours": "AMBULATOIRE",
+    "date_soin": "2026-11-19",
+    "actes": [
+      {
+        "code_ngap": "CS-150",
+        "libelle": "Consultation médecin spécialiste",
+        "montant_facture": 250.0,
+        "tnr": 150.0
+      }
+    ]
+  },
+  "response_200": {
+    "fse_id": "FSE-2026-00981",
+    "montant_total_facture": 250.0,
+    "base_tnr": 150.0,
+    "taux_amo_applique": 0.7,
+    "part_amo_remboursee": 105.0,
+    "reste_a_charge": 145.0,
+    "statut_liquidation": "EN_COURS_ANALYSE_IA"
+  }
+}
