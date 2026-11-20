@@ -6,7 +6,19 @@ scrape_configs:
     metrics_path: '/metrics'
     static_configs:
       - targets:
-          - '192.168.1.10:8080' # api-gateway
-          - '192.168.1.11:8001' # g1: service-identite-ins
-          - '192.168.1.11:8002' # g1: service-facturation-amo
-          - '192.168.1.11:8003' # g1: service-ia-fraude
+          - 'api-gateway:8080'
+          - 'ms-identite-ins:8001'
+          - 'ms-facturation-amo:8002'
+          - 'ms-ia-fraude:8003'
+          - 'ms-pharmacy-sentinel:8004'
+          - 'ms-citizen-multilingual:8005'
+          - 'ms-entrepot-omop:8006'
+          - 'ms-recherche:8007'
+          - 'ms-ia-complications:8008'
+          - 'ms-ai-grc:8009'
+          - 'ms-certification-dm-ia:8010'
+          - 'ms-macert-soc:8011'
+          - 'ms-mdp-clinique:8012'
+          - 'ms-health-data-exchange:8013'
+          - 'ms-hospital-discharge:8014'
+          - 'ms-medical-scribe:8015'

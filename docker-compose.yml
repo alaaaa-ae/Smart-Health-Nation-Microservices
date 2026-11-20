@@ -1,43 +1,144 @@
 version: '3.8'
 
-services:
-  # Groupe 1 : Identité Nationale de Santé (INS)
-  service-identite-ins:
-    build: ./service-identite-ins
-    container_name: g1-service-identite-ins
-    ports:
-      - "8001:8001"
-    env_file:
-      - .env
-    networks:
-      - smart-health-net
+services: {}
 
-  # Groupe 1 : Facturation & Remboursement AMO (CNSS / CNOPS)
-  service-facturation-amo:
-    build: ./service-facturation-amo
-    container_name: g1-service-facturation-amo
-    ports:
-      - "8002:8002"
-    env_file:
-      - .env
-    depends_on:
-      - service-identite-ins
-    networks:
-      - smart-health-net
+# Groupe 1 : Identité Nationale de Santé (INS)
+# ms-identite-ins:
+#   build: ./ms-identite-ins
+#   container_name: ms-identite-ins
+#   ports:
+#     - "8001:8001"
+#   env_file:
+#     - .env
+#   networks:
+#     - smart-health-net
+#
+# Groupe 1 : Facturation & Remboursement AMO (CNSS / CNOPS)
+# ms-facturation-amo:
+#   build: ./ms-facturation-amo
+#   container_name: ms-facturation-amo
+#   ports:
+#     - "8002:8002"
+#   env_file:
+#     - .env
+#   depends_on:
+#     - ms-identite-ins
+#   networks:
+#     - smart-health-net
+#
+# Groupe 1 : Détection de Fraude & Anomalies AMO (IA)
+# ms-ia-fraude:
+#   build: ./ms-ia-fraude
+#   container_name: ms-ia-fraude
+#   ports:
+#     - "8003:8003"
+#   env_file:
+#     - .env
+#   depends_on:
+#     - ms-identite-ins
+#     - ms-facturation-amo
+#   networks:
+#     - smart-health-net
 
-  # Groupe 1 : Détection de Fraude & Anomalies AMO (IA)
-  service-ia-fraude:
-    build: ./service-ia-fraude
-    container_name: g1-service-ia-fraude
-    ports:
-      - "8003:8003"
-    env_file:
-      - .env
-    depends_on:
-      - service-identite-ins
-      - service-facturation-amo
-    networks:
-      - smart-health-net
+  # Groupe 2 : Veille Sanitaire & Citoyens
+  # ms-pharmacy-sentinel:
+  #   build: ./ms-pharmacy-sentinel
+  #   container_name: ms-pharmacy-sentinel
+  #   ports:
+  #     - "8004:8004"
+  #   networks:
+  #     - smart-health-net
+  #
+  # ms-citizen-multilingual:
+  #   build: ./ms-citizen-multilingual
+  #   container_name: ms-citizen-multilingual
+  #   ports:
+  #     - "8005:8005"
+  #   networks:
+  #     - smart-health-net
+
+  # Groupe 3 : Health Data Hub
+  # ms-entrepot-omop:
+  #   build: ./ms-entrepot-omop
+  #   container_name: ms-entrepot-omop
+  #   ports:
+  #     - "8006:8006"
+  #   networks:
+  #     - smart-health-net
+  #
+  # ms-recherche:
+  #   build: ./ms-recherche
+  #   container_name: ms-recherche
+  #   ports:
+  #     - "8007:8007"
+  #   networks:
+  #     - smart-health-net
+  #
+  # ms-ia-complications:
+  #   build: ./ms-ia-complications
+  #   container_name: ms-ia-complications
+  #   ports:
+  #     - "8008:8008"
+  #   networks:
+  #     - smart-health-net
+
+  # Groupe 4 : Gouvernance IA, Cybersécurité & DPI
+  # ms-ai-grc:
+  #   build: ./ms-ai-grc
+  #   container_name: ms-ai-grc
+  #   ports:
+  #     - "8009:8009"
+  #   networks:
+  #     - smart-health-net
+  #
+  # ms-certification-dm-ia:
+  #   build: ./ms-certification-dm-ia
+  #   container_name: ms-certification-dm-ia
+  #   ports:
+  #     - "8010:8010"
+  #   networks:
+  #     - smart-health-net
+  #
+  # ms-macert-soc:
+  #   build: ./ms-macert-soc
+  #   container_name: ms-macert-soc
+  #   ports:
+  #     - "8011:8011"
+  #   networks:
+  #     - smart-health-net
+  #
+  # ms-mdp-clinique:
+  #   build: ./ms-mdp-clinique
+  #   container_name: ms-mdp-clinique
+  #   ports:
+  #     - "8012:8012"
+  #   networks:
+  #     - smart-health-net
+
+  # Groupe 5 : Interopérabilité & Parcours Hospitalier
+  # ms-health-data-exchange:
+  #   build: ./ms-health-data-exchange
+  #   container_name: ms-health-data-exchange
+  #   ports:
+  #     - "8013:8013"
+  #   networks:
+  #     - smart-health-net
+  #
+  # ms-hospital-discharge:
+  #   build: ./ms-hospital-discharge
+  #   container_name: ms-hospital-discharge
+  #   ports:
+  #     - "8014:8014"
+  #   networks:
+  #     - smart-health-net
+  #
+  # ms-medical-scribe:
+  #   build: ./ms-medical-scribe
+  #   container_name: ms-medical-scribe
+  #   ports:
+  #     - "8015:8015"
+  #   networks:
+  #     - smart-health-net
 
 networks:
   smart-health-net:

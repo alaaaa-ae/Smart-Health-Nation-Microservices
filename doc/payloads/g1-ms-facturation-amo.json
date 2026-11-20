@@ -1,5 +1,5 @@
 {
-  "service": "service-facturation-amo",
+  "service": "ms-facturation-amo",
   "groupe": "G1",
   "endpoint": "POST /api/v1/fse/liquidate",
   "request_body": {

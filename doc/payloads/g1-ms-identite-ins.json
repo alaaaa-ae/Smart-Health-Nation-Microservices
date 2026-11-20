@@ -1,5 +1,5 @@
 {
-  "service": "service-identite-ins",
+  "service": "ms-identite-ins",
   "groupe": "G1",
   "endpoint": "GET /api/v1/ins/resolve?cnie=AB123456",
   "response_200": {

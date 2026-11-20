@@ -1,9 +1,13 @@
 {
-  "note": "BROUILLON / PROPOSITION — Contrats d'interface initiaux à discuter et valider avec l'équipe G1 et les autres groupes",
-  "service_dpi_clinique": {
-    "statut": "PROPOSITION (Pris en charge par un autre groupe — contrat à aligner ensemble)",
-    "endpoint": "GET /fhir/v1/Encounter?patient={ins}",
-    "usage_par_g1": "Permettrait à service-ia-fraude de vérifier que l'acte NGAP facturé correspond bien à une consultation clinique réelle dans le DPI",
+  "note": "BROUILLON / PROPOSITION — Les services propriétaires sont attribués ; les contrats d'interface restent à valider avec les groupes concernés.",
+  "verification_rencontre_clinique": {
+    "service": "ms-mdp-clinique",
+    "groupe": "G4",
+    "port": 8012,
+    "route_api_gateway": "/fhir/v1/mdp/**",
+    "statut": "PROPOSITION — propriétaire confirmé, contrat à aligner avec G4",
+    "endpoint": "GET /fhir/v1/mdp/Encounter?patient={ins}",
+    "usage_par_g1": "Permettrait à ms-ia-fraude de vérifier que l'acte NGAP facturé correspond bien à une consultation clinique réelle dans le DPI",
     "proposed_response_200": {
       "resourceType": "Bundle",
       "type": "searchset",
@@ -46,16 +50,31 @@
       ]
     }
   },
-  "services_optionnels_non_attribues": {
-    "service_consentement": {
-      "statut": "PROPOSITION (En attente d'attribution à un groupe)",
-      "endpoint": "GET /api/v1/consent/{ins}",
-      "usage_par_g1": "Vérifie le consentement explicite du patient avant traitement analytique"
-    },
-    "service_audit_securite": {
-      "statut": "PROPOSITION (En attente d'attribution à un groupe)",
-      "endpoint": "POST /api/v1/audit/logs",
-      "usage_par_g1": "Journalise les alertes de fraude IA et les accès aux données assurés"
-    }
+  "enregistrement_ia": {
+    "service": "ms-ai-grc",
+    "groupe": "G4",
+    "port": 8009,
+    "route_api_gateway": "/api/v1/ai-grc/**",
+    "statut": "PROPOSITION — propriétaire confirmé, contrat à aligner avec G4",
+    "endpoint": "POST /api/v1/ai-grc/registrations",
+    "usage_par_g1": "Enregistrer les modèles d'IA utilisés pour l'analyse de fraude et consulter leur classification de risque."
+  },
+  "journalisation_incident_securite": {
+    "service": "ms-macert-soc",
+    "groupe": "G4",
+    "port": 8011,
+    "route_api_gateway": "/api/v1/macert/**",
+    "statut": "PROPOSITION — propriétaire confirmé, contrat à aligner avec G4",
+    "endpoint": "POST /api/v1/macert/incidents",
+    "usage_par_g1": "Journaliser les alertes de fraude IA et les accès aux données assurés."
+  },
+  "verification_consentement": {
+    "service": "ms-health-data-exchange",
+    "groupe": "G5",
+    "port": 8013,
+    "route_api_gateway": "/fhir/v1/exchange/**",
+    "statut": "PROPOSITION — propriétaire confirmé, contrat à aligner avec G5",
+    "endpoint": "GET /fhir/v1/exchange/consent/{ins}",
+    "usage_par_g1": "Vérifier le consentement explicite du patient avant traitement analytique."
   }
 }

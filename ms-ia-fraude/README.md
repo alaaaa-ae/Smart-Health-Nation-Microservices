@@ -1,4 +1,4 @@
-# service-ia-fraude (Groupe 1)
+# ms-ia-fraude (Groupe 1)
 
 ## Rôle
 Microservice intelligent d'audit médico-financier des remboursements AMO (CNSS / DMFAR / CNOPS) :
@@ -8,4 +8,4 @@ Microservice intelligent d'audit médico-financier des remboursements AMO (CNSS 
 
 ## Endpoints Exposés
 * `GET /health` : État du service
-* `POST /api/v1/fraud/analyze` : Évalue le risque de fraude d'une FSE (voir `doc/payloads/G1-ia-fraude.json`).
+* `POST /api/v1/fraud/analyze` : Évalue le risque de fraude d'une FSE (voir `doc/payloads/g1-ms-ia-fraude.json`).

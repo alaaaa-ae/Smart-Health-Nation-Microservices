@@ -1,5 +1,5 @@
 {
-  "service": "service-ia-fraude",
+  "service": "ms-ia-fraude",
   "groupe": "G1",
   "endpoint": "POST /api/v1/fraud/analyze",
   "request_body": {
