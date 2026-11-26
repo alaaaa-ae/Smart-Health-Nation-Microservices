@@ -4,6 +4,8 @@ Point d'entrée unique de l'architecture microservices. Les règles ci-dessous d
 
 ## Convention de routage
 
+G1 assure le routage intergroupes et l’authentification centralisée. La configuration IAM a son propre [dossier Keycloak](keycloak/README.md).
+
 | Route API Gateway | Service | Groupe | IP Proxmox | Port |
 | :--- | :--- | :--- | :--- | :--- |
 | `/api/v1/ins/**` | `ms-identite-ins` | G1 | `192.168.1.11` | `8001` |

@@ -19,7 +19,7 @@ Afin de garantir la cohérence entre l'arborescence Git, le DNS interne Docker/P
 
 | Service / Dossier | Groupe | Rôle & Domaine Fonctionnel | IP Proxmox | Port | Route API Gateway |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **`api-gateway`** | Transversal | Point d'entrée central : routage, validation JWT et équilibrage de charge | `192.168.1.10` | `8080` | `/*` |
+| **`api-gateway`** | G1 (transversal) | Point d’entrée central, routage, IAM Keycloak, validation JWT et équilibrage de charge | `192.168.1.10` | `8080` | `/*` |
 | **`ms-identite-ins`** | **G1** | Résolution de l'Identité Nationale de Santé (INS via CNIE/DGSN), droits AMO/ALD (CNSS/CNOPS) et JWT | `192.168.1.11` | `8001` | `/api/v1/ins/**` |
 | **`ms-facturation-amo`** | **G1** | Génération et liquidation de la Feuille de Soins Électronique (FSE), codage NGAP, INPE et calcul TNR | `192.168.1.11` | `8002` | `/api/v1/fse/**` |
 | **`ms-ia-fraude`** | **G1** | Audit médico-financier temps réel des FSE avant paiement et détection d'anomalies (Isolation Forest + GNN) | `192.168.1.11` | `8003` | `/api/v1/fraude/**` |
