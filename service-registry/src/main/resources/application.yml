@@ -1,0 +1,108 @@
+# =====================================================================
+# Service Registry (Netflix Eureka Server)
+#
+# Default profile  = local standalone development (single node).
+# "prod" profile   = clustered / hardened settings (see bottom of file).
+# Every value can be overridden through environment variables.
+# =====================================================================
+
+spring:
+  application:
+    name: service-registry
+
+server:
+  port: ${SERVER_PORT:8761}
+
+eureka:
+  instance:
+    # Hostname advertised to peers and shown in the dashboard.
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:localhost}
+    # Set to true inside containers/k8s when hostnames are not resolvable.
+    prefer-ip-address: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:false}
+    # To force a specific advertised IP, set EUREKA_INSTANCE_IP_ADDRESS
+    # (relaxed binding maps it to eureka.instance.ip-address).
+
+  client:
+    # Standalone node: do not register with itself nor fetch its own registry.
+    register-with-eureka: ${EUREKA_REGISTER_WITH_EUREKA:false}
+    fetch-registry: ${EUREKA_FETCH_REGISTRY:false}
+    service-url:
+      defaultZone: ${EUREKA_PEER_URLS:http://${eureka.instance.hostname}:${server.port}/eureka/}
+
+  server:
+    # Self-preservation protects the registry against mass eviction during
+    # network partitions. Keep it enabled; only disable explicitly for local
+    # experiments via EUREKA_SELF_PRESERVATION=false.
+    enable-self-preservation: ${EUREKA_SELF_PRESERVATION:true}
+    renewal-percent-threshold: ${EUREKA_RENEWAL_PERCENT_THRESHOLD:0.85}
+    # How often expired leases are evicted (ms).
+    eviction-interval-timer-in-ms: ${EUREKA_EVICTION_INTERVAL_MS:60000}
+    # Refresh interval of the read-only response cache used by GET /eureka/apps (ms).
+    response-cache-update-interval-ms: ${EUREKA_RESPONSE_CACHE_UPDATE_INTERVAL_MS:30000}
+
+  dashboard:
+    enabled: ${EUREKA_DASHBOARD_ENABLED:true}
+    path: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${MANAGEMENT_ENDPOINTS_INCLUDE:health,info,metrics}
+  endpoint:
+    health:
+      show-details: ${MANAGEMENT_HEALTH_SHOW_DETAILS:always}
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+    java:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: Central Netflix Eureka service registry
+    role: infrastructure
+
+---
+# =====================================================================
+# Production profile: activate with SPRING_PROFILES_ACTIVE=prod
+# =====================================================================
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+eureka:
+  instance:
+    # Must be the DNS name peers and clients use to reach this node.
+    hostname: ${EUREKA_INSTANCE_HOSTNAME}
+  client:
+    # In a peer cluster each node registers with, and replicates from, its peers.
+    register-with-eureka: ${EUREKA_REGISTER_WITH_EUREKA:true}
+    fetch-registry: ${EUREKA_FETCH_REGISTRY:true}
+    service-url:
+      # Comma-separated list of peer URLs, e.g.
+      # https://registry-1.internal:8761/eureka/,https://registry-2.internal:8761/eureka/
+      defaultZone: ${EUREKA_PEER_URLS}
+  server:
+    # Never disable self-preservation in production.
+    enable-self-preservation: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # Metrics are not exposed publicly; scrape them from a protected
+        # management port/network if needed.
+        include: ${MANAGEMENT_ENDPOINTS_INCLUDE:health,info}
+  endpoint:
+    health:
+      show-details: ${MANAGEMENT_HEALTH_SHOW_DETAILS:never}
+  info:
+    env:
+      enabled: false
+    java:
+      enabled: false
